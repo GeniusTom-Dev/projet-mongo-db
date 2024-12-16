@@ -37,7 +37,6 @@ const AddProductModal = ({ isOpen, onClose, getProducts }) => {
 
             const response = await axios.post('http://localhost:' + port +'/addProduct', queryParameters);
 
-            console.log(response.data)
         } catch (error) {
             console.error('Error adding product:', error);
         }

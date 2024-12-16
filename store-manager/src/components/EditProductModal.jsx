@@ -24,15 +24,12 @@ const EditProductModal = ({ isOpen, onClose,getProducts, formData, setFormData }
 
     const editProduct = async (formData) => {
         try {
-            console.log(typeof formData)
             let queryParameters = {
                 filter: { reference: formData.reference },
                 updateSet: formData
             }
 
             const response = await axios.put('http://localhost:' + port +'/updateOneProduct', queryParameters);
-
-            console.log(response.data)
         } catch (error) {
             console.error('Error adding product:', error);
         }

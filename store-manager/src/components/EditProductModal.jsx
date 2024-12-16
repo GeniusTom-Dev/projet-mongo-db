@@ -3,7 +3,7 @@ import axios from "axios";
 
 const EditProductModal = ({ isOpen, onClose,getProducts, formData, setFormData }) => {
 
-    const port = import.meta.env.PORT
+    const port = import.meta.env.VITE_SERVER_PORT
 
     const handleChange = (e) => {
         const { name, value } = e.target;

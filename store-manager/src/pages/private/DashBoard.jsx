@@ -4,7 +4,7 @@ import axios from "axios";
 
 function DashBoard(props) {
 
-    const port = import.meta.env.PORT
+    const port = import.meta.env.VITE_SERVER_PORT
 
     const [sort, setSort] = useState({"price": 1})
     const [currentPage, setCurrentPage] = useState(1);

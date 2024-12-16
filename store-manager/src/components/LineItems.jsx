@@ -4,8 +4,7 @@ import {EditProductModal} from "./";
 
 function LineItems(props) {
 
-    const port = import.meta.env.PORT
-
+    const port = import.meta.env.VITE_SERVER_PORT
 
     const deleteProduct = async () => {
         try {

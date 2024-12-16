@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const AddProductModal = ({ isOpen, onClose, getProducts }) => {
-    const port = import.meta.env.PORT
+    const port = import.meta.env.VITE_SERVER_PORT
 
     const [formData, setFormData] = useState({
         name: "",

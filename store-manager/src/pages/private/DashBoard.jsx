@@ -4,6 +4,8 @@ import axios from "axios";
 
 function DashBoard(props) {
 
+    const port = import.meta.env.PORT
+
     const [sort, setSort] = useState({"price": 1})
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);   // Total pages state
@@ -23,11 +25,11 @@ function DashBoard(props) {
                 limit: nbAffiche
             }
 
-            const response = await axios.get('http://localhost:5000/products', {
+            const response = await axios.get('http://localhost:' + port +'/products', {
                 params: queryParameters
             });
 
-            const count = await axios.get('http://localhost:5000/productCount');
+            const count = await axios.get('http://localhost:' + port +'/productCount');
 
             setTotalPages(Math.ceil(count.data.count / nbAffiche))
 
@@ -42,7 +44,7 @@ function DashBoard(props) {
                 value: value
             }
 
-            const response = await axios.get('http://localhost:5000/searchProducts', {
+            const response = await axios.get('http://localhost:' + port +'/searchProducts', {
                 params: queryParameters
             });
 

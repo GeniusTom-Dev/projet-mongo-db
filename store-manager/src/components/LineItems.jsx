@@ -4,9 +4,12 @@ import {EditProductModal} from "./";
 
 function LineItems(props) {
 
+    const port = import.meta.env.PORT
+
+
     const deleteProduct = async () => {
         try {
-            const response = await axios.delete('http://localhost:5000/deleteOne', {
+            const response = await axios.delete('http://localhost:' + port +'/deleteOne', {
                 data: { filter: { reference: props.reference } }
             });
 

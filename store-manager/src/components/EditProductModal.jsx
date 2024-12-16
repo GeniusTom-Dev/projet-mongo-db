@@ -3,6 +3,8 @@ import axios from "axios";
 
 const EditProductModal = ({ isOpen, onClose,getProducts, formData, setFormData }) => {
 
+    const port = import.meta.env.PORT
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -28,7 +30,7 @@ const EditProductModal = ({ isOpen, onClose,getProducts, formData, setFormData }
                 updateSet: formData
             }
 
-            const response = await axios.put('http://localhost:5000/updateOneProduct', queryParameters);
+            const response = await axios.put('http://localhost:' + port +'/updateOneProduct', queryParameters);
 
             console.log(response.data)
         } catch (error) {

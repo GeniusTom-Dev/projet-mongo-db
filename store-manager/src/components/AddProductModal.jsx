@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const AddProductModal = ({ isOpen, onClose, getProducts }) => {
+    const port = import.meta.env.PORT
+
     const [formData, setFormData] = useState({
         name: "",
         reference: "",
@@ -33,7 +35,7 @@ const AddProductModal = ({ isOpen, onClose, getProducts }) => {
                 product: formData
             }
 
-            const response = await axios.post('http://localhost:5000/addProduct', queryParameters);
+            const response = await axios.post('http://localhost:' + port +'/addProduct', queryParameters);
 
             console.log(response.data)
         } catch (error) {

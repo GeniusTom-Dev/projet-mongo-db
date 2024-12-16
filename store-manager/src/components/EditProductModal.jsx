@@ -16,7 +16,7 @@ const EditProductModal = ({ isOpen, onClose,getProducts, formData, setFormData }
         formData.price = parseFloat(formData.price);
         formData.quantity = parseInt(formData.quantity);
 
-        await editProduct(formData).catch((error) => console.error("Error adding product:", error));
+        await editProduct(formData).catch((error) => console.error("Error editing product:", error));
         setFormData({ name: "", reference: "", price: "", quantity: "", description: "" });
         onClose(); // Fermer la popup après ajout
         getProducts(); // Mettre à jour la liste des produits
@@ -31,7 +31,7 @@ const EditProductModal = ({ isOpen, onClose,getProducts, formData, setFormData }
 
             const response = await axios.put('http://localhost:' + port +'/updateOneProduct', queryParameters);
         } catch (error) {
-            console.error('Error adding product:', error);
+            console.error('Error editing product:', error);
         }
     }
 

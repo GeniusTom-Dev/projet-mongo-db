@@ -52,7 +52,7 @@ function DashBoard(props) {
 
             setProducts(Object.entries(response.data))
         } catch (error) {
-            console.error('Error adding product:', error);
+            console.error('Error get product by keyword:', error);
         }
     }
 
@@ -95,7 +95,7 @@ function DashBoard(props) {
     };
 
     useEffect(() => {
-        getProducts().catch((error) => console.error("Error adding product:", error));
+        getProducts().catch((error) => console.error("Error get product:", error));
     }, [sort,currentPage,nbAffiche]);
 
     return (

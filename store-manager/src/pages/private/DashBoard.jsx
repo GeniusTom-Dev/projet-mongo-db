@@ -48,6 +48,8 @@ function DashBoard(props) {
                 params: queryParameters
             });
 
+            setTotalPages(1)
+
             setProducts(Object.entries(response.data))
         } catch (error) {
             console.error('Error adding product:', error);

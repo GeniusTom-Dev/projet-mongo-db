@@ -4,14 +4,14 @@ function Navbar(props) {
     return (
         <aside className="w-64 bg-white p-6 border-r">
             <div className={"flex justify-between items-center mb-6"}>
-                <h1 className="text-2xl font-bold">Entreprise</h1>
+                <h1 className="text-2xl font-bold">I. M.</h1>
                 <img src={"./src/assets/logo.png"} alt={"logo"} className={"rounded-full w-12"}/>
             </div>
             <nav>
                 <ul className="space-y-4">
                     <li>
                         <a
-                            href="#"
+                            href="/"
                             className="block text-gray-900 font-semibold hover:text-gray-600"
                         >
                             Tous les produits

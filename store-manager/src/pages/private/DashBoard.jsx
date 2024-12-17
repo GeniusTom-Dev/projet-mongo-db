@@ -6,7 +6,8 @@ function DashBoard(props) {
 
     const port = import.meta.env.VITE_SERVER_PORT
 
-    const [sort, setSort] = useState({"price": 1})
+    const [sort, setSort] = useState({"reference": 1})
+    const [forceFilter, setForceFilter] = useState(props.forceFilter ? props.forceFilter : {})
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);   // Total pages state
     const [nbAffiche, setNbAffiche] = useState(10);   // Number of items to display per page
@@ -21,6 +22,7 @@ function DashBoard(props) {
         try {
             let queryParameters = {
                 sort: JSON.stringify(sort),
+                filter: JSON.stringify(forceFilter),
                 page: currentPage,
                 limit: nbAffiche
             }
@@ -29,7 +31,9 @@ function DashBoard(props) {
                 params: queryParameters
             });
 
-            const count = await axios.get('http://localhost:' + port +'/productCount');
+            const count = await axios.get('http://localhost:' + port +'/productCount',{
+                params: {filter: JSON.stringify(forceFilter)}
+            });
 
             setTotalPages(Math.ceil(count.data.count / nbAffiche))
 
@@ -41,7 +45,8 @@ function DashBoard(props) {
     const filterByKeyword = async (value) => {
         try {
             let queryParameters = {
-                value: value
+                value: value,
+                filter: JSON.stringify(forceFilter),
             }
 
             const response = await axios.get('http://localhost:' + port +'/searchProducts', {

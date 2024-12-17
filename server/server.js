@@ -11,8 +11,6 @@ app.use(express.json());
 const uri = "mongodb+srv://tomeven:I1FolNn3GV5r6ZOx@cluster0.dd0qz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri);
 
-
-
 let collection = null
 
 async function getCollection() {
@@ -31,7 +29,6 @@ app.get('/products', async (req, res) => {
         const sort = req.query.sort ? JSON.parse(req.query.sort) : {};
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 50;
-
 
         const products = await collection.find(find).sort(sort).skip((page-1)*limit).limit(limit).toArray()
 
@@ -52,7 +49,9 @@ app.get('/productCount', async (req, res) => {
         if (collection === null) {
             collection = await getCollection();
         }
-        const count = await collection.countDocuments();
+        const find = req.query.filter ? JSON.parse(req.query.filter) : {};
+
+        const count = await collection.countDocuments(find);
         res.json({ count });
     } catch (error) {
         console.error(error);
@@ -66,6 +65,7 @@ app.get('/searchProducts', async (req, res) => {
             collection = await getCollection();
         }
         const value = req.query.value ? req.query.value : "";
+        const filter = req.query.filter ? Object.entries(JSON.parse(req.query.filter)) : {};
         const regex = new RegExp(value, 'i');
         const products = await collection.find({
             $or: [
@@ -74,8 +74,12 @@ app.get('/searchProducts', async (req, res) => {
                 {reference: { $regex: regex }},
                 {price: { $regex: regex }},
                 {description: { $regex: regex }}
-            ]
-        }).limit(10).toArray();
+            ],
+            ...filter.reduce((acc, [key, value]) => {
+                acc[key] = value;
+                return acc;
+            }, {})
+        }).limit(10).toArray()
 
         if (products.length === 0) {
             return res.status(404).send('Produit non trouvé');

@@ -145,7 +145,7 @@ app.delete('/deleteOne', async (req, res) => {
         if (collection === null) {
             collection = await getCollection();
         }
-        console.log(req.body)
+
         const filter = req.body.filter ? req.body.filter : "";
         if(req.body.filter === "") {
             return res.status(400).send('Paramètre filter manquant');
